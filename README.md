@@ -1,7 +1,7 @@
 # Sports-Complex-Booking-Management-System (SQL Project)
 
 ## Project Objective
-A sports complex with wants to create a comprehensive database system for a sports complex, incorporating various rooms and facilities, to efficiently manage bookings, enforce user registration, and implement a cancellation policy with fines for repeated cancellations.
+A sports complex wants to create a comprehensive database system, incorporating various rooms and facilities, to efficiently manage bookings, enforce user registration, and implement a cancellation policy with fines for repeated cancellations.
 
 ## Process
 * Designing and creating the database schema.
