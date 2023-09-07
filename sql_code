@@ -1,9 +1,9 @@
-* creating a database
+-- creating a database
 create database sports_booking;
 use sports_booking;
 
 
-* creating different tables
+-- creating different tables
 create table members (
 id varchar(255) primary key,
 password varchar(255) not null,
@@ -34,7 +34,7 @@ datetime_of_booking timestamp not null default now(),
 payment_status varchar(255) not null default 'Unpaid');
 
 
-* altering table constraints 
+-- altering table constraints 
 alter table bookings
 add constraint fk1 foreign key(member_id) references members(id)
 on delete cascade on update cascade,
@@ -42,7 +42,12 @@ add constraint fk2 foreign key(room_id) references rooms(id)
 on delete cascade on update cascade;
 
 
-* inserting data into the records
+-- adding new column in pending_terminations
+alter table pending_terminations
+add column email varchar(255) after id;
+
+
+-- inserting data into the records
 insert into members(id, password, email,  member_since, payment_due) values 
 ('afeil', 'feil1988<3', 'Abdul.Feil@hotmail.com', '2017-04-15 12:10:13', 0),
 ('amely_18', 'loseweightin18', 'Amely.Bauch91@yahoo.com', '2018-02-06 16:48:43', 0),
@@ -58,12 +63,12 @@ insert into members(id, password, email,  member_since, payment_due) values
 select * from bookings
 
 
-* removing price column
+-- removing price column
 alter table bookings
 drop column price
 
 
-* inserting data into the records
+-- inserting data into the records
 insert into bookings(id,room_id,booked_date,booked_time,member_id,datetime_of_booking,payment_status) values
 (1, 'AR', '2017-12-26', '13:00:00', 'oreillys', '2017-12-20 20:31:27', 'Paid'),
 (2, 'MPF1', '2017-12-30', '17:00:00', 'noah51', '2017-12-22 05:22:10', 'Paid'),
@@ -80,7 +85,7 @@ select * from rooms
 select * from bookings
 
 
-* creating temporary table
+--creating temporary table
 create view v_bookings_rooms as
 select a.id, a.room_id, b.room_type, a.booked_date, a.booked_time,
 a.member_id, a.datetime_of_booking, b.price, a.payment_status
@@ -91,7 +96,7 @@ on a.room_id=b.id
 select * from members
 
 
-* creating various stored procedures 
+-- creating various stored procedures 
 delimiter //
 create procedure insert_new_member (in p_id varchar(255),in p_password varchar(255),in p_email varchar(255))
 begin
@@ -192,7 +197,7 @@ begin
     end if;
 end //
 
-* creating stored function
+-- creating stored function
 delimiter //
 create function check_cancellation (p_booking_id int) returns int deterministic
 begin
@@ -219,7 +224,7 @@ begin
 end //
 
 
-* creating trigger 
+-- creating trigger 
 delimiter //
 create trigger payment_check before delete on members for each row
 begin
@@ -232,7 +237,7 @@ begin
 end //
 
 
-* Testing the database
+-- Testing the database
 use sports_booking;
 SELECT * FROM members;
 SELECT * FROM pending_terminations;
@@ -243,6 +248,7 @@ CALL insert_new_member ('angelolott', '1234abcd',
 SELECT * FROM members ORDER BY member_since DESC;
 CALL delete_member ('afeil');
 CALL delete_member ('angelolott');
+CALL delete_member ('little31');
 SELECT * FROM members;
 SELECT * FROM pending_terminations;
 CALL update_member_password ('noah51', '18Oct1976');
