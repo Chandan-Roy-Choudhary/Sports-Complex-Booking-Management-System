@@ -12,5 +12,3 @@ A sports complex wants to create a comprehensive database system, incorporating 
 * Implementing triggers for automated actions.
 * Building functions for specific calculations and validations.
 * Testing the system.
-
-## SQL Code
